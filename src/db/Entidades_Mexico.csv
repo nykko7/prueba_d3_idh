@@ -1,0 +1,33 @@
+﻿Id,Estado,Variable,RENAPO,ISO 3166-2 (2 Dígitos),ISO 3166-2 (3 Dígitos)
+1,Aguascalientes,Ags.,AS,AG,AGU
+2,Baja California,B.C.,BC,BC,BCN
+3,Baja California Sur,B.C.S.,BS,BS,BCS
+4,Campeche,Camp.,CC,CM,CAM
+5,Chiapas,Chis.,CS,CS,CHP
+6,Chihuahua,Chih.,CH,CH,CHH
+7,Ciudad de México,C.D.Mx.,DF,CXB​,CMXC​
+8,Coahuila,Coah.,CL,CO,COA
+9,Colima,Col.,CM,CL,COL
+10,Durango,Dgo.,DG,DG,DUR
+11,Guanajuato,Gto.,GT,GT,GUA
+12,Guerrero,Gro.,GR,GR,GRO
+13,Hidalgo,Hgo.,HG,HG,HID
+14,Jalisco,Jal.,JC,JC,JAL
+15,México,Edo. Méx.D​,MC,EME​,MEX
+16,Michoacán,Mich.,MN,MI,MIC
+17,Morelos,Mor.,MS,MO,MOR
+18,Nayarit,Nay.,NT,NA,NAY
+19,Nuevo León,N.L.,NL,NL,NLE
+20,Oaxaca,Oax.,OC,OA,OAX
+21,Puebla,Pue.,PL,PU,PUE
+22,Querétaro,Qro.,QO,QT,QUE
+23,Quintana Roo,Q. Roo.F​,QR,QR,ROO
+24,San Luis Potosí,S.L.P.,SP,SL,SLP
+25,Sinaloa,Sin.,SL,SI,SIN
+26,Sonora,Son.,SR,SO,SON
+27,Tabasco,Tab.,TC,TB,TAB
+28,Tamaulipas,Tamps.,TS,TM,TAM
+29,Tlaxcala,Tlax.,TL,TL,TLA
+30,Veracruz,Ver.,VZ,VE,VER
+31,Yucatán,Yuc.,YN,YU,YUC
+32,Zacatecas,Zac.,ZS,ZA,ZAC
