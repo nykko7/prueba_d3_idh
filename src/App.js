@@ -7,7 +7,7 @@ const csvUrl =
 
 const width = 960;
 const height = 500;
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const margin = { top: 20, right: 20, bottom: 20, left: 200 };
 
 function App() {
 	const [data, setData] = useState(null);
@@ -21,7 +21,14 @@ function App() {
 	}, []);
 
 	if (!data) {
-		return <pre>Loading...</pre>;
+		return (
+			<>
+				<h1 style={{ textAlign: 'center' }}>
+					Prueba D3 - Índice de Desarrollo Humano
+				</h1>
+				<pre>Loading...</pre>
+			</>
+		);
 	}
 
 	console.log(data[0]);
@@ -44,8 +51,34 @@ function App() {
 			<h1 style={{ textAlign: 'center' }}>
 				Prueba D3 - Índice de Desarrollo Humano
 			</h1>
-			<g transform={`translate(${margin.left}, ${margin.top})`}>
-				<svg width={width} height={height}>
+			<svg width={width} height={height}>
+				<g transform={`translate(${margin.left}, ${margin.top})`}>
+					{xScale.ticks().map((tickValue) => (
+						<g
+							key={tickValue}
+							transform={`translate(${xScale(tickValue)},0)`}
+						>
+							<line y2={innerHeight} stroke='black' />
+							<text
+								style={{ textAnchor: 'middle' }}
+								y={innerHeight + 3}
+								dy='0.73em'
+							>
+								{tickValue}
+							</text>
+						</g>
+					))}
+					{yScale.domain().map((tickValue) => (
+						<text
+							key={tickValue}
+							style={{ textAnchor: 'end' }}
+							dy='.32em'
+							x={-3}
+							y={yScale(tickValue) + yScale.bandwidth() / 2}
+						>
+							{tickValue}
+						</text>
+					))}
 					{data.map((d, i) => (
 						<rect
 							key={i}
@@ -55,8 +88,8 @@ function App() {
 							height={yScale.bandwidth()}
 						/>
 					))}
-				</svg>
-			</g>
+				</g>
+			</svg>
 		</>
 	);
 }
