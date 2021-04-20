@@ -8,7 +8,9 @@ export const Marks = ({ data, yScale, xScale, xValue, yValue }) => {
 			width={xScale(xValue(d))}
 			height={yScale.bandwidth()}
 		>
-			<title>{xValue(d)}</title>
+			<title>
+				Indice de Desarrollo Humano {d['Estado']}: {xValue(d)}
+			</title>
 		</rect>
 	));
 };

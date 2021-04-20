@@ -9,7 +9,7 @@ import { Marks } from './components/Marks';
 
 const width = window.innerWidth;
 const height = 500;
-const margin = { top: 20, right: 30, bottom: 65, left: 150 };
+const margin = { top: 20, right: 30, bottom: 65, left: 70 };
 const xAxisLabelOffset = 50;
 
 console.log(width);
