@@ -1,16 +1,27 @@
-export const Marks = ({ data, yScale, xScale, xValue, yValue }) => {
-	return data.map((d) => (
-		<rect
-			className='mark'
-			key={yValue(d)}
-			x={0}
-			y={yScale(yValue(d))}
-			width={xScale(xValue(d))}
-			height={yScale.bandwidth()}
-		>
-			<title>
-				Indice de Desarrollo Humano {d['Estado']}: {xValue(d)}
-			</title>
-		</rect>
-	));
+export const Marks = ({
+	data,
+	yScale,
+	xScale,
+	xValue,
+	yValue,
+	idValue,
+	selectedEntity,
+}) => {
+	return data.map((d) => {
+		const selected = parseInt(idValue(d)) === selectedEntity.value;
+		return (
+			<rect
+				className={`mark${selected ? ' selected' : ''}`}
+				key={yValue(d)}
+				x={0}
+				y={yScale(yValue(d))}
+				width={xScale(xValue(d))}
+				height={yScale.bandwidth()}
+			>
+				<title>
+					{d['Estado']} - Indice de Desarrollo Humano: {xValue(d)}
+				</title>
+			</rect>
+		);
+	});
 };

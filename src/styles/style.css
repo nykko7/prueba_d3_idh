@@ -21,7 +21,35 @@ pre {
 	fill: #137b80;
 }
 
+.mark.selected {
+	fill: #ffa500;
+}
+
 .axis-label {
 	font-size: 2.5em;
 	fill: #635f5d;
+}
+
+.menus-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.dropdown-menu {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 5px;
+}
+
+.Dropdown-root {
+	font-size: 0.8em;
+	width: 210px;
+	display: inline-block;
+}
+.Dropdown-menu {
+	max-height: 400px;
 }
