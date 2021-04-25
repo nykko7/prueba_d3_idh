@@ -16,7 +16,7 @@ const xAxisLabelOffset = 50;
 
 console.log(width);
 function App() {
-	const data = useData();
+	const [data, setData] = useData();
 
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
@@ -43,7 +43,28 @@ function App() {
 	//DROPDOWN YEAR:
 
 	//DROPDOWN TO SORT:
-	const [sortBy, setSortBy] = useState('alphabetically');
+	const [sortBy, setSortBy] = useState(0);
+	const sortOptions = [
+		{ label: 'Alfabeticamente (A - Z)', value: 'alphabetically' },
+		{ label: 'Ascendente (0 - 1) ', value: 'ascending' },
+		{ label: 'Descendente (1 - 0)', value: 'descending' },
+	];
+
+	useEffect(() => {
+		if (sortBy === 0) return;
+		let key = sortBy.value === 'alphabetically' ? 'Estado' : 'IDH';
+
+		setData(
+			[...data].sort((a, b) => {
+				if (
+					sortBy.value === 'ascending' ||
+					sortBy.value === 'alphabetically'
+				)
+					return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
+				else return a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
+			}),
+		);
+	}, [sortBy, data, setData]);
 
 	const yValue = (d) => d['ISO 3166-2 (3 Dígitos)'];
 	const xValue = (d) => d.IDH;
@@ -77,9 +98,26 @@ function App() {
 								placeholder='Selecciona un Estado'
 							/>
 						</div>
+						<div className='dropdown-menu'>
+							<span className='dropdown-label'>Año:</span>
+							<Dropdown
+								options={entitiesName}
+								value={selectedEntity}
+								onChange={(value) => setSelectedEntity(value)}
+								placeholder='Selecciona un Año'
+							/>
+						</div>
+						<div className='dropdown-menu'>
+							<span className='dropdown-label'>Ordenar Datos:</span>
+							<Dropdown
+								options={sortOptions}
+								value={sortBy}
+								onChange={(value) => setSortBy(value)}
+								placeholder='Selecciona un Orden'
+							/>
+						</div>
 					</div>
 
-					{console.log(entitiesName)}
 					<svg width={width} height={height}>
 						<g transform={`translate(${margin.left}, ${margin.top})`}>
 							<AxisBottom xScale={xScale} innerHeight={innerHeight} />
