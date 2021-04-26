@@ -1,6 +1,6 @@
 # Federative States of Mexico and their Index of Human Development (IDH).
 
-The objective of this project is to present an interactive bar graph using [React](https://reactjs.org/) and [D3.js](https://d3js.org/) library to visually represent the HDI of each state of Mexico from a randomly generated fictitious dataset.
+The objective of this project is to present an interactive bar graph using [React](https://reactjs.org/) and [D3.js](https://d3js.org/) library to visually represent the IDH of each state of Mexico from a randomly generated fictitious dataset.
 
 ## 📋 Features & Resources
 - States of Mexico and their abbreviatures from [Wikipedia](https://es.wikipedia.org/wiki/Plantilla:Abreviaciones_de_los_estados_de_M%C3%A9xico).

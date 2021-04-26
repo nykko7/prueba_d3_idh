@@ -8,7 +8,7 @@ export const Marks = ({
 	selectedEntity,
 }) => {
 	return data.map((d) => {
-		const selected = parseInt(idValue(d)) === selectedEntity.value;
+		const selected = parseInt(idValue(d)) === selectedEntity;
 		return (
 			<rect
 				className={`mark${selected ? ' selected' : ''}`}

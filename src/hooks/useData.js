@@ -7,14 +7,24 @@ const csvUrl =
 
 export const useData = () => {
 	const [data, setData] = useState(null);
+	let years = [];
+
+	while (years.length < 7) {
+		let year = Math.floor(Math.random() * (2020 - 1950)) + 1950;
+		if (years.indexOf(year) === -1) years.push(year);
+	}
+	years = [...years].sort((a, b) => a - b);
 
 	useEffect(() => {
 		const row = (d) => {
-			d.IDH = +Math.random().toFixed(2);
+			years.forEach((year) => {
+				d[year] = Math.random().toFixed(2);
+			});
 			return d;
 		};
 		csv(csvUrl, row).then(setData);
+		// eslint-disable-next-line
 	}, []);
 
-	return [data, setData];
+	return [data, setData, years];
 };

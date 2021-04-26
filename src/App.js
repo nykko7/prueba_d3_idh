@@ -16,7 +16,7 @@ const xAxisLabelOffset = 50;
 
 console.log(width);
 function App() {
-	const [data, setData] = useData();
+	const [data, setData, years] = useData();
 
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
@@ -41,6 +41,10 @@ function App() {
 	const idValue = (d) => d.Id;
 
 	//DROPDOWN YEAR:
+	const [entitiesYears] = useState(years);
+	const initialYear = entitiesYears[entitiesYears.length - 1];
+
+	const [selectedYear, setSelectedYear] = useState(initialYear);
 
 	//DROPDOWN TO SORT:
 	const [sortBy, setSortBy] = useState(0);
@@ -52,22 +56,18 @@ function App() {
 
 	useEffect(() => {
 		if (sortBy === 0) return;
-		let key = sortBy.value === 'alphabetically' ? 'Estado' : 'IDH';
+		let key = sortBy === 'alphabetically' ? 'Estado' : selectedYear;
+		let sortedData = [...data].sort((a, b) => {
+			if (sortBy === 'ascending' || sortBy === 'alphabetically')
+				return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
+			else return a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
+		});
 
-		setData(
-			[...data].sort((a, b) => {
-				if (
-					sortBy.value === 'ascending' ||
-					sortBy.value === 'alphabetically'
-				)
-					return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
-				else return a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
-			}),
-		);
-	}, [sortBy, data, setData]);
+		setData([...sortedData]);
+	}, [sortBy, data, setData, selectedYear]);
 
 	const yValue = (d) => d['ISO 3166-2 (3 Dígitos)'];
-	const xValue = (d) => d.IDH;
+	const xValue = (d) => d[selectedYear];
 
 	const yScale =
 		data &&
@@ -78,6 +78,28 @@ function App() {
 
 	const xScale =
 		data && scaleLinear().domain([0, 1]).range([0, innerWidth]);
+
+	let sum = 0;
+	let maxIdh = 0;
+	let minIdh = 1;
+	let promIdh = 1;
+
+	useEffect(() => {
+		const entity = data
+			? data.find((entity) => parseInt(entity.Id) === selectedEntity)
+			: {};
+
+		entitiesYears.forEach((year) => {
+			if (entity[year] >= maxIdh) maxIdh = entity[year];
+			if (entity[year] <= minIdh) minIdh = entity[year];
+			sum += entity[year];
+		});
+
+		promIdh = sum / entitiesYears.length;
+
+		console.log(entity);
+		// eslint-disable-next-line
+	}, [selectedEntity, entitiesYears]);
 
 	return (
 		<>
@@ -93,17 +115,17 @@ function App() {
 							<span className='dropdown-label'>Estado:</span>
 							<Dropdown
 								options={entitiesName}
-								value={selectedEntity}
-								onChange={(value) => setSelectedEntity(value)}
+								value={selectedEntity.value}
+								onChange={({ value }) => setSelectedEntity(value)}
 								placeholder='Selecciona un Estado'
 							/>
 						</div>
 						<div className='dropdown-menu'>
 							<span className='dropdown-label'>Año:</span>
 							<Dropdown
-								options={entitiesName}
-								value={selectedEntity}
-								onChange={(value) => setSelectedEntity(value)}
+								options={entitiesYears}
+								value={selectedYear.value}
+								onChange={({ value }) => setSelectedYear(value)}
 								placeholder='Selecciona un Año'
 							/>
 						</div>
@@ -111,8 +133,8 @@ function App() {
 							<span className='dropdown-label'>Ordenar Datos:</span>
 							<Dropdown
 								options={sortOptions}
-								value={sortBy}
-								onChange={(value) => setSortBy(value)}
+								value={sortBy.value}
+								onChange={({ value }) => setSortBy(value)}
 								placeholder='Selecciona un Orden'
 							/>
 						</div>
@@ -141,6 +163,18 @@ function App() {
 							/>
 						</g>
 					</svg>
+					<div className='entity-statistics'>
+						{selectedEntity ? (
+							<>
+								<h2>Estadisticas:</h2>
+								<h3>Promedio IDH:{promIdh}</h3>
+								<h3>IDH más alto:{maxIdh}</h3>
+								<h3>IDH más bajo:{minIdh}</h3>
+							</>
+						) : (
+							''
+						)}
+					</div>
 				</>
 			)}
 		</>
