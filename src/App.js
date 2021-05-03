@@ -8,6 +8,7 @@ import { useData } from './hooks/useData';
 import { AxisBottom } from './components/AxisBottom';
 import { AxisLeft } from './components/AxisLeft';
 import { Marks } from './components/Marks';
+import { Title } from './components/Title';
 
 const width = window.innerWidth;
 const height = 500;
@@ -63,8 +64,9 @@ function App() {
 			else return a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
 		});
 
-		setData([...sortedData]);
-	}, [sortBy, data, setData, selectedYear]);
+		setData(sortedData);
+		// eslint-disable-next-line
+	}, [sortBy, selectedYear]);
 
 	const yValue = (d) => d['ISO 3166-2 (3 Dígitos)'];
 	const xValue = (d) => d[selectedYear];
@@ -79,33 +81,47 @@ function App() {
 	const xScale =
 		data && scaleLinear().domain([0, 1]).range([0, innerWidth]);
 
-	let sum = 0;
-	let maxIdh = 0;
-	let minIdh = 1;
-	let promIdh = 1;
+	const [maxIdh, setMaxIdh] = useState(0);
+	const [minIdh, setMinIdh] = useState(1);
+	const [promIdh, setPromIdh] = useState(1);
 
 	useEffect(() => {
 		const entity = data
 			? data.find((entity) => parseInt(entity.Id) === selectedEntity)
 			: {};
-
-		entitiesYears.forEach((year) => {
-			if (entity[year] >= maxIdh) maxIdh = entity[year];
-			if (entity[year] <= minIdh) minIdh = entity[year];
-			sum += entity[year];
-		});
-
-		promIdh = sum / entitiesYears.length;
-
 		console.log(entity);
+
+		if (
+			Object.keys(entity).length === 0 &&
+			entity.constructor === Object
+		)
+			return;
+
+		let sum = 0;
+		let maxIdh = 0;
+		let minIdh = 1;
+
+		for (let i = 0; i < entitiesYears.length; i++) {
+			let year = entitiesYears[i];
+
+			if (entity[year] > maxIdh) maxIdh = entity[year];
+
+			if (entity[year] < minIdh) minIdh = entity[year];
+
+			sum += entity[year];
+		}
+
+		setMaxIdh(maxIdh.toFixed(2));
+		setMinIdh(minIdh.toFixed(2));
+		setPromIdh((sum / entitiesYears.length).toFixed(2));
+		console.log(sum);
+		console.log(entitiesYears.length);
 		// eslint-disable-next-line
-	}, [selectedEntity, entitiesYears]);
+	}, [selectedEntity]);
 
 	return (
 		<>
-			<h1 style={{ textAlign: 'center' }}>
-				Prueba D3 - Índice de Desarrollo Humano
-			</h1>
+			<Title title='Prueba D3 - Índice de Desarrollo Humano' />
 			{!data ? (
 				<pre>Loading...</pre>
 			) : (
@@ -167,9 +183,9 @@ function App() {
 						{selectedEntity ? (
 							<>
 								<h2>Estadisticas:</h2>
-								<h3>Promedio IDH:{promIdh}</h3>
-								<h3>IDH más alto:{maxIdh}</h3>
-								<h3>IDH más bajo:{minIdh}</h3>
+								<h3>Promedio IDH: {promIdh}</h3>
+								<h3>IDH más alto: {maxIdh}</h3>
+								<h3>IDH más bajo: {minIdh}</h3>
 							</>
 						) : (
 							''

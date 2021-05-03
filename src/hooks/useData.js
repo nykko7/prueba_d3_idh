@@ -18,7 +18,7 @@ export const useData = () => {
 	useEffect(() => {
 		const row = (d) => {
 			years.forEach((year) => {
-				d[year] = Math.random().toFixed(2);
+				d[year] = parseFloat(Math.random().toFixed(2));
 			});
 			return d;
 		};
