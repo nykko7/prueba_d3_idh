@@ -8,6 +8,7 @@ import { Title } from './components/Title';
 import { BarChart } from './components/BarChart';
 import { DropdownMenu } from './components/DropdownMenu';
 import { Statistics } from './components/Statistics';
+import { Loading } from './components/Loading';
 
 function App() {
 	const [data, setData, years] = useData();
@@ -21,7 +22,7 @@ function App() {
 		<>
 			<Title title='Prueba D3 - Índice de Desarrollo Humano' />
 			{!data ? (
-				<pre>Loading...</pre>
+				<Loading />
 			) : (
 				<>
 					<DropdownMenu

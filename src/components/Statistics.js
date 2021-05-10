@@ -19,6 +19,7 @@ export const Statistics = ({
 		let sum = 0;
 		let maxIdh = 0;
 		let minIdh = 1;
+		console.log(entity);
 
 		for (let i = 0; i < entitiesYears.length; i++) {
 			let year = entitiesYears[i];
@@ -39,10 +40,29 @@ export const Statistics = ({
 		<div className='entity-statistics'>
 			{selectedEntity ? (
 				<>
-					<h2>Estadisticas:</h2>
-					<h3>Promedio IDH: {promIdh}</h3>
-					<h3>IDH más alto: {maxIdh}</h3>
-					<h3>IDH más bajo: {minIdh}</h3>
+					<table>
+						<thead>
+							<tr>
+								<th colSpan='2' className='statistics-title'>
+									<h2>Estadisticas</h2>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Promedio IDH</th>
+								<td>{promIdh}</td>
+							</tr>
+							<tr>
+								<th>IDH más alto</th>
+								<td>{maxIdh}</td>
+							</tr>
+							<tr>
+								<th>IDH más bajo</th>
+								<td>{minIdh}</td>
+							</tr>
+						</tbody>
+					</table>
 				</>
 			) : (
 				''

@@ -1,5 +1,5 @@
 {
-  "homepage":"https://nykko7.github.io/prueba_d3_idh",
+  "homepage": "https://nykko7.github.io/prueba_d3_idh",
   "name": "prueba_d3_idh",
   "version": "0.1.0",
   "private": true,
@@ -11,12 +11,13 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropdown": "^1.9.2",
+    "react-loading": "^2.0.3",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy" : "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
