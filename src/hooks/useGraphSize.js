@@ -5,9 +5,9 @@ export default function useGraphSize() {
 	const { width, height } = useWindowSize();
 	const [margin, setMargin] = useState({
 		top: 20,
-		right: 70,
+		right: 80,
 		bottom: 65,
-		left: 70,
+		left: 80,
 	});
 
 	const [graphSize, setGraphSize] = useState({
@@ -16,17 +16,22 @@ export default function useGraphSize() {
 	});
 
 	useEffect(() => {
-		setMargin((prevMargin) => {
-			if (prevMargin !== margin) {
-				return {
+		setMargin(
+			(prevMargin) => {
+				const newMargin = {
 					...prevMargin,
-					right: width >= 1000 ? 140 : 100,
-					left: width >= 1000 ? 140 : 100,
+					right: width >= 1000 ? 140 : 80,
+					left: width >= 1000 ? 140 : 80,
 				};
-			} else {
-				return margin;
-			}
-		});
+
+				if (prevMargin.right !== newMargin.right) {
+					return newMargin;
+				} else {
+					return margin;
+				}
+			},
+			[width],
+		);
 
 		setGraphSize({
 			innerWidth: width - margin.left - margin.right,

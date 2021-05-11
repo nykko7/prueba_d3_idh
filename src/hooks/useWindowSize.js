@@ -11,10 +11,12 @@ export default function useWindowSize() {
 			width: window.innerWidth,
 			height: 500,
 		});
+		console.log(window.innerWidth);
 	}
 
 	useEffect(() => {
 		window.addEventListener('resize', changeWindowSize);
+		changeWindowSize();
 		return () =>
 			window.removeEventListener('resize', changeWindowSize);
 	}, []);

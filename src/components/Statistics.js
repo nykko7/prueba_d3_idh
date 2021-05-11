@@ -43,8 +43,8 @@ export const Statistics = ({
 					<table>
 						<thead>
 							<tr>
-								<th colSpan='2' className='statistics-title'>
-									<h2>Estadisticas</h2>
+								<th colSpan='2'>
+									<h2>ESTADÍSTICAS</h2>
 								</th>
 							</tr>
 						</thead>
