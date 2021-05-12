@@ -40,7 +40,7 @@ export const AxisBottom = ({
 									? '0.6em'
 									: innerWidth <= 740
 									? '0.8em'
-									: '1em',
+									: '1.05em',
 						}}
 						dx='-0.8em'
 						dy={3}
