@@ -6,9 +6,11 @@ import { Marks } from './Marks';
 import useGraphSize from '../hooks/useGraphSize';
 
 export const BarChart = ({ data, selectedEntity, selectedYear }) => {
-	const { width, height } = useGraphSize().windowSize;
-	const { innerWidth, innerHeight } = useGraphSize().graphSize;
-	const { margin } = useGraphSize();
+	const { graphSize, margin, windowSize } = useGraphSize();
+
+	const { width, height } = windowSize;
+	const { innerWidth, innerHeight } = graphSize;
+
 	const xAxisLabelOffset = 50;
 
 	const isHorizontalBar = width <= 480;

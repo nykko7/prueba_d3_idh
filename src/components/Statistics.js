@@ -19,7 +19,6 @@ export const Statistics = ({
 		let sum = 0;
 		let maxIdh = 0;
 		let minIdh = 1;
-		console.log(entity);
 
 		for (let i = 0; i < entitiesYears.length; i++) {
 			let year = entitiesYears[i];

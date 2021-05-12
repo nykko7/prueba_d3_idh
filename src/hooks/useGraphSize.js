@@ -52,8 +52,6 @@ export default function useGraphSize() {
 			innerWidth: width - margin.left - margin.right,
 			innerHeight: height - margin.top - margin.bottom,
 		});
-
-		console.log(graphSize.innerWidth, graphSize.innerHeight);
 	}, [width, height, margin]);
 
 	return { graphSize, margin, windowSize: { width, height } };
