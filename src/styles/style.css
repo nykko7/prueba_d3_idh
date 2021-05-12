@@ -88,6 +88,15 @@ th {
 	font-weight: bold;
 }
 
+table h2 {
+	color: #ffa500;
+	text-decoration: underline;
+}
+
+td {
+	color: #635f5d;
+}
+
 svg {
 	width: 100%;
 }

@@ -6,21 +6,32 @@ export const Marks = ({
 	yValue,
 	idValue,
 	selectedEntity,
+	isHorizontalBar,
+	innerHeight,
 }) => {
 	return data.map((d) => {
 		const selected = parseInt(idValue(d)) === selectedEntity;
-		return (
+		return isHorizontalBar ? (
 			<rect
 				className={`mark${selected ? ' selected' : ''}`}
-				key={yValue(d)}
+				key={idValue(d)}
 				x={0}
 				y={yScale(yValue(d))}
 				width={xScale(xValue(d))}
 				height={yScale.bandwidth()}
 			>
-				<title>
-					{d['Estado']} - Indice de Desarrollo Humano: {xValue(d)}
-				</title>
+				<title>Indice de Desarrollo Humano: {xValue(d)}</title>
+			</rect>
+		) : (
+			<rect
+				className={`mark${selected ? ' selected' : ''}`}
+				key={idValue(d)}
+				x={xScale(xValue(d))}
+				y={yScale(yValue(d))}
+				width={xScale.bandwidth()}
+				height={innerHeight - yScale(yValue(d))}
+			>
+				<title>Indice de Desarrollo Humano: {yValue(d)}</title>
 			</rect>
 		);
 	});

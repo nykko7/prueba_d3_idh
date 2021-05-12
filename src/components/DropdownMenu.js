@@ -70,7 +70,11 @@ export const DropdownMenu = ({
 					options={entitiesYears}
 					value={selectedYear.value}
 					onChange={({ value }) => setSelectedYear(value)}
-					placeholder='Selecciona un Año'
+					// placeholder='Selecciona un Año'
+					defaultValue={{
+						label: selectedYear.value,
+						value: selectedYear.value,
+					}}
 				/>
 			</div>
 			<div className='dropdown-menu'>

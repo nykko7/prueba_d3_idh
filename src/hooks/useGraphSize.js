@@ -5,9 +5,16 @@ export default function useGraphSize() {
 	const { width, height } = useWindowSize();
 	const [margin, setMargin] = useState({
 		top: 20,
-		right: 80,
-		bottom: 65,
-		left: 80,
+		right:
+			width >= 1480
+				? 140
+				: width >= 1000
+				? 80
+				: width >= 480
+				? 40
+				: 20,
+		left: width >= 1480 ? 140 : width >= 1000 ? 80 : 60,
+		bottom: width >= 480 ? 170 : 65,
 	});
 
 	const [graphSize, setGraphSize] = useState({
@@ -20,8 +27,16 @@ export default function useGraphSize() {
 			(prevMargin) => {
 				const newMargin = {
 					...prevMargin,
-					right: width >= 1000 ? 140 : 80,
-					left: width >= 1000 ? 140 : 80,
+					right:
+						width >= 1480
+							? 140
+							: width >= 1000
+							? 80
+							: width >= 480
+							? 40
+							: 20,
+					left: width >= 1480 ? 140 : width >= 1000 ? 80 : 60,
+					bottom: width >= 480 ? 170 : 65,
 				};
 
 				if (prevMargin.right !== newMargin.right) {
@@ -37,6 +52,8 @@ export default function useGraphSize() {
 			innerWidth: width - margin.left - margin.right,
 			innerHeight: height - margin.top - margin.bottom,
 		});
+
+		console.log(graphSize.innerWidth, graphSize.innerHeight);
 	}, [width, height, margin]);
 
 	return { graphSize, margin, windowSize: { width, height } };
